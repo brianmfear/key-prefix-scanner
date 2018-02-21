@@ -1,0 +1,76 @@
+<apex:page controller="KeyPrefixScanner">
+    <style>
+    .hidden {
+        display: none;
+    }
+    table#results tbody#output tr:hover {
+        background: #ccf;
+    }
+    #progressArea {
+        text-align: center;
+    }
+    </style>
+    <apex:sectionHeader title="Key Prefix Scanner" />
+    <apex:pageBlock title="Information">
+        <div id="progressArea">
+            <progress id="progress" max="100" value="0" /><br />
+            <span id="progressText"></span>
+        </div>
+        <table id="results" class="hidden">
+            <thead>
+                <tr>
+                    <th style="width: 7em">Key Prefix</th>
+                    <th style="width: 10em">API Name</th>
+                </tr>
+            </thead>
+            <tbody id="output">
+            
+            </tbody>
+        </table>
+    </apex:pageBlock>
+    <script>
+    var values = [];
+    // Displays results on the screen
+    function render() {
+        var fragment = document.createDocumentFragment();
+        document.getElementById("progressArea").className = "hidden";
+        values.forEach(function(v) {
+            var row = document.createElement("tr"), 
+                column1 = document.createElement("td"), 
+                column2 = document.createElement("td");
+            column1.textContent = v.keyPrefix;
+            column2.textContent = v.apiName;
+            row.appendChild(column1);
+            row.appendChild(column2);
+            fragment.appendChild(row);
+        });
+        document.getElementById("results").className = "shown";
+        document.getElementById("output").appendChild(fragment);
+    }
+    // Performs a remote action, and updates the progress bar
+    function getMoreItems(data, event) {
+        var percentDone;
+        if(event.status) {
+            percentDone = Math.floor(100*(((data.value1*3844)+(data.value2*62)+data.value3)/238328));
+            document.getElementById("progressText").textContent = percentDone+"%";
+            document.getElementById("progress").value = percentDone;
+            if(data.done) {
+                render();
+            } else {
+                data.values.forEach(function(v) { values.push(v); });
+                data.values = [];
+                {!$RemoteAction.KeyPrefixScanner.findKeys}(data, getMoreItems);
+            }
+        } else {
+            // Show an error and stop
+            alert(event.message || event);
+        }
+    }
+    // Wait for the page to finish loading
+    window.addEventListener(
+        "DOMContentLoaded",
+        function() {
+            getMoreItems({value1:0, value2:0, value3:0, done:false, values:[]},{status:true});
+        });
+    </script>
+</apex:page>
