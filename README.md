@@ -1,6 +1,6 @@
 # Key Prefix Scanner
 
-This is a simple Visualforce page that uses Id.getSObjectType to find key prefixes, including "hidden" object types.
+This is a simple Visualforce page and Lightning Component/Application that uses Id.getSObjectType to find key prefixes, including "hidden" object types.
 
 ## Getting Started
 
@@ -8,8 +8,7 @@ Simply clone this project to your local system.
 
 ### Prerequisites
 
-You'll need a metadata tool to deploy this code. You can use Salesforce DX, the Metadata Toolkit, Developer Workbench, or any other tool that supports
-deploying metadata.
+You'll need a metadata tool to deploy this code. You can use Salesforce DX, the Metadata Toolkit, Developer Workbench, or any other tool that supports deploying metadata.
 
 ### Installing
 
@@ -23,7 +22,7 @@ sfdx force:mdapi:deploy -d src -u <org-alias> -w -1
 
 #### Metadata Toolkit
 
-Update the build.properties file with your Salesforce credentials, then run the following command:
+Update the [build.properties](build.properties) file with your Salesforce credentials, then run the following command:
 
 ```
 ant deploy
