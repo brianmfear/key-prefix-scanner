@@ -18,4 +18,9 @@
         System.assertEquals(0, payload.value2);
         System.assertEquals(62, payload.value1);
     }
+    @isTest static void testLightningFind() {
+        KeyPrefixScanner.Payload payload = KeyPrefixScanner.lightningFindKeys(0, 0, 0);
+        System.assertEquals('001', payload.values[0].keyPrefix);
+        System.assertEquals('Account', payload.values[0].apiName);
+    }
 }

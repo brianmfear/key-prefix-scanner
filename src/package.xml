@@ -11,6 +11,25 @@
         <name>ApexPage</name>
     </types>
     <types>
+        <members>keyPrefixScanner</members>
+        <members>prefixScanner</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
+    <types>
+        <members>Classic_Key_Prefix_Scanner</members>
+        <members>Key_Prefix_Scanner</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>Key_Prefix_Scanner</members>
+        <members>Key_Prefix_Scanner_VF</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Key_Prefix_Scanner_UtilityBar</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
         <members>Key_Prefix_Scanner</members>
         <name>PermissionSet</name>
     </types>

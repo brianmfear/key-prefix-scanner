@@ -1,0 +1,56 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes"
+                controller="KeyPrefixScanner" 
+                access="global" >
+    <aura:attribute name="data"
+                    type="Map"
+                    default="{ done: false }" />
+    <aura:attribute name="sortField"
+                    type="String" 
+                    default="keyPrefix" />
+    <aura:attribute name="sortDirection"
+                    type="String" 
+                    default="asc" />
+    <aura:attribute name="searchText"
+                    type="String" />
+    <aura:attribute name="filtered"
+                    type="List"
+                    default="[]" />
+    <aura:attribute name="columns"
+                    type="List" />
+    <aura:attribute name="progress"
+                    type="Integer"
+                    default="0" />
+    
+    <aura:handler name="init"
+                  value="{!this}"
+                  action="{!c.init}" />
+    <aura:handler name="change"
+                  value="{!v.searchText}"
+                  action="{!c.filter}" />
+    
+    <div class="slds-form slds-form_stacked">
+        <aura:if isTrue="{!v.data.done}">
+            <div class="slds-form-element">
+                <lightning:input label="Filter"
+                                 value="{!v.searchText}"
+                                 name="filter" />
+            </div>
+            <div class="slds-form-element">
+                <lightning:datatable aura:id="dataTable"
+                                     keyField="apiName"
+                                     hideCheckboxColumn="true"
+                                     onsort="{!c.sort}"
+                                     sortedBy="{!v.sortField}"
+                                     sortedDirection="{!v.sortDirection}"
+                                     data="{!v.filtered}" 
+                                     columns="{!v.columns}"/>
+            </div>
+            <aura:set attribute="else">
+                <lightning:progressBar value="{!v.progress}" />
+                <lightning:spinner size="large"
+                                   variant="brand" />
+            </aura:set>
+        </aura:if>
+    </div>
+    
+</aura:component>

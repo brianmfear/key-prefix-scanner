@@ -1,13 +1,16 @@
 global class KeyPrefixScanner {
     // Response Data
     global class Data {
-        global String keyPrefix, apiName;
+        @AuraEnabled global String keyPrefix;
+        @AuraEnabled global String apiName;
     }
     // Communications between client and server
     global class Payload {
-        global Boolean done = false;
-        global Integer value1 = 0, value2 = 0, value3 = 0;
-        global Data[] values = new Data[0];
+        @AuraEnabled global Boolean done;
+        @AuraEnabled global Integer value1;
+        @AuraEnabled global Integer value2;
+        @AuraEnabled global Integer value3;
+        @AuraEnabled global Data[] values;
         // Go to the next base62 value
         Boolean increment() {
             value3++;
@@ -44,5 +47,14 @@ global class KeyPrefixScanner {
             source.increment();
         }
         return source;
+    }
+    @AuraEnabled global static Payload lightningFindKeys(Integer value1, Integer value2, Integer value3) {
+        Payload temp = new Payload();
+        temp.done = false;
+        temp.values = new Data[0];
+        temp.value1 = Integer.valueOf(value1);
+        temp.value2 = Integer.valueOf(value2);
+        temp.value3 = Integer.valueOf(value3);
+        return findKeys(temp);
     }
 }
