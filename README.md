@@ -14,6 +14,15 @@ You'll need a metadata tool to deploy this code. You can use Salesforce DX, the 
 
 Deploy this package to your org using any of several possible commands:
 
+#### Automatic Deployment
+
+Click the button below to automatically deploy the package to your org:
+
+<a href="https://githubsfdeploy.herokuapp.com">
+  <img alt="Deploy to Salesforce"
+       src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
+</a>
+
 #### sfdx
 
 ```
@@ -43,4 +52,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 * [FishOfPrey](https://github.com/FishOfPrey) for the original [blog post](http://www.fishofprey.com/2011/09/obscure-salesforce-object-key-prefixes.html) that inspired this project.
-
+* [Andrew Fawcett](https://github.com/afawcett) for the awesome [GitHub Deployment Tool](https://github.com/afawcett/githubsfdeploy).
